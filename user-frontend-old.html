@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Maria - Salsa Macha</title>
+  <meta name="description" content="Handcrafted Salsa Macha. Artisanal, Spicy, Crunchy.">
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=open-sans:400,600,700|oswald:400,700,900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+:root {
+  --color-surface: #eceef4;
+  --color-surface-dark: #e4e6ed;
+  --color-ink: #2d2d3a;
+  --color-muted: #7a7d8c;
+  --color-white: #ffffff;
+  
+  --shadow-light-color: #ffffff;
+  --shadow-mid-color: #d6d9e4;
+  --shadow-dark-color: #d0d3de;
+}
+
+html.dark {
+  --color-surface: #16161b;
+  --color-surface-dark: #121216;
+  --color-ink: #f0f2f8;
+  --color-muted: #888c99;
+  --color-white: #1a1a20;
+
+  --shadow-light-color: #202026;
+  --shadow-mid-color: #0d0d10;
+  --shadow-dark-color: #0a0a0c;
+}
+
+@theme {
+  --color-surface: var(--color-surface);
+  --color-surface-dark: var(--color-surface-dark);
+  --color-coral: #e8553e;
+  --color-coral-dark: #c43e2a;
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-white: var(--color-white);
+  --font-display: 'Oswald', Arial, sans-serif;
+  --font-sans: 'Open Sans', Arial, sans-serif;
+  --radius-neo: 1.25rem;
+  --radius-neo-sm: 0.75rem;
+}
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  body { background-color: var(--color-surface); color: var(--color-ink); font-family: 'Open Sans', Arial, sans-serif; overflow-x: hidden; line-height: 1.5; transition: background-color 0.4s, color 0.4s; }
+  [x-cloak] { display: none !important; }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; text-decoration: none; }
+}
+
+@layer utilities {
+  .neo { box-shadow: 12px 12px 30px var(--shadow-mid-color), -12px -12px 30px var(--shadow-light-color); }
+  .neo-sm { box-shadow: 6px 6px 14px var(--shadow-mid-color), -6px -6px 14px var(--shadow-light-color); }
+  .neo-lg { box-shadow: 18px 18px 40px var(--shadow-dark-color), -18px -18px 40px var(--shadow-light-color); }
+  .neo-inset { box-shadow: inset 5px 5px 12px var(--shadow-mid-color), inset -5px -5px 12px var(--shadow-light-color); }
+  .neo-btn { box-shadow: 5px 5px 12px var(--shadow-dark-color), -3px -3px 8px var(--shadow-light-color); }
+  .neo-btn:active { box-shadow: inset 3px 3px 7px var(--shadow-dark-color), inset -2px -2px 5px var(--shadow-light-color); transform: scale(0.98); }
+  .font-display { font-family: 'Oswald', Arial, sans-serif; }
+  .section-pad { padding: 8rem 1rem; }
+  @media (min-width: 768px) { .section-pad { padding: 12rem 2rem; } }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .animate-marquee { animation: marquee 32s linear infinite; }
+  .animate-marquee-rev { animation: marquee 32s linear infinite reverse; }
+  @keyframes floatY1 { 0%,100% { translate: 0 0px; } 50% { translate: 0 -40px; } }
+  @keyframes floatY2 { 0%,100% { translate: 0 0px; } 50% { translate: 0 -60px; } }
+  @keyframes floatY3 { 0%,100% { translate: 0 0px; } 50% { translate: 0 -25px; } }
+  .animate-float-1 { animation: floatY1 14s ease-in-out infinite; }
+  .animate-float-2 { animation: floatY2 18s ease-in-out infinite; }
+  .animate-float-3 { animation: floatY3 12s ease-in-out infinite; }
+  @keyframes jumpDown {
+    0% { transform: translateY(-150vh) scale(0.5) rotate(15deg); opacity: 0; }
+    65% { transform: translateY(4%) scale(1.05) rotate(-2deg); opacity: 1; }
+    100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+  }
+  .animate-jump-down {
+    animation: jumpDown 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes kickflip {
+    0% { transform: perspective(1200px) rotateX(-110deg) translateY(100px); opacity: 0; }
+    65% { transform: perspective(1200px) rotateX(15deg) translateY(-15px); opacity: 1; }
+    100% { transform: perspective(1200px) rotateX(0deg) translateY(0); opacity: 1; }
+  }
+  .animate-kickflip {
+    animation: kickflip 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    transform-origin: center center;
+  }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.revealed { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body class="bg-surface">
+
+  <div id="app" x-data="app" x-cloak>
+
+    <!-- Loading State -->
+    <div x-show="!appConfig"
+      style="position:fixed;inset:0;background:var(--color-surface);z-index:999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+      <template x-if="!appError">
+        <div class="neo rounded-2xl p-8 text-center flex flex-col items-center">
+          <svg class="w-16 h-16 animate-[spin_1.5s_linear_infinite] mb-4 drop-shadow-md"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
+            viewBox="0 0 396.338 396.338" xml:space="preserve">
+            <g>
+              <path style="fill:#9AD14B;"
+                d="M134.345,172.389c-10.31,9.53-24.09,15.34-39.23,15.34c-4.64,0-9.15-0.56-13.47-1.59   c-2.2,11.31-7.69,21.44-15.45,29.35c-5.73,5.85-12.69,10.49-20.47,13.5c0,0.05,0.01,0.11,0.01,0.17c0,14.05-5.01,26.93-13.35,36.95   c-24.52-23.25-27.81-61.23-8.34-88.29c2.73-3.8,5.91-7.39,9.55-10.69l0.76-0.69c7.81-7.08,16.87-12,26.43-14.75   c20.33-5.88,42.95-1.99,60.71,11.68C125.635,166.559,129.925,169.569,134.345,172.389z" />
+              <path style="fill:#F95428;"
+                d="M388.835,100.049c-4.26,118.37-101.55,213.03-220.96,213.03c-15.8,0-31.21-1.66-46.06-4.8   c-30.03-6.37-57.8-18.83-81.97-36.03c-2.67-1.9-5.16-3.95-7.46-6.14c8.34-10.02,13.35-22.9,13.35-36.95c0-0.06-0.01-0.12-0.01-0.17   c18.3-7.08,32.09-23.17,35.92-42.85c4.32,1.03,8.83,1.59,13.47,1.59c15.14,0,28.92-5.81,39.23-15.34   c27.46,17.52,60.07,27.67,95.06,27.67C299.565,200.059,360.195,159.239,388.835,100.049z" />
+              <path style="fill:#90BC42;"
+                d="M45.725,228.989c0,0.05,0.01,0.11,0.01,0.17c0,14.05-5.01,26.93-13.35,36.95   c-24.52-23.25-27.81-61.23-8.34-88.29c2.73-3.8,5.91-7.39,9.55-10.69l0.76-0.69c7.81-7.08,16.87-12,26.43-14.75l0.37,1.75   c0,0-24,32,5,62c0.02,0.02,0.03,0.03,0.04,0.05C60.465,221.339,53.505,225.979,45.725,228.989z" />
+              <path style="fill:#E54728;"
+                d="M121.815,308.279c-30.03-6.37-57.8-18.83-81.97-36.03c-2.67-1.9-5.16-3.95-7.46-6.14   c8.34-10.02,13.35-22.9,13.35-36.95c0-0.06-0.01-0.12-0.01-0.17c18.3-7.08,32.09-23.17,35.92-42.85c4.32,1.03,8.83,1.59,13.47,1.59   C95.115,187.729,58.055,275.319,121.815,308.279z" />
+              <path style="fill:#FFFFFF;"
+                d="M229.405,230.559c-25.702,0-50.823-4.662-74.666-13.856c-3.865-1.49-5.79-5.831-4.3-9.696   c1.491-3.865,5.829-5.791,9.696-4.299c22.114,8.527,45.42,12.851,69.27,12.851c36.875,0,72.713-10.461,103.64-30.253   c1.078-0.69,2.146-1.388,3.208-2.098c3.445-2.301,8.102-1.377,10.403,2.066c2.303,3.443,1.378,8.101-2.065,10.403   c-1.146,0.766-2.298,1.519-3.46,2.263C307.786,219.279,269.151,230.559,229.405,230.559z" />
+              <circle style="fill:#FFFFFF;" cx="135.817" cy="199.954" r="7.5" />
+              <path style="fill:#333333;"
+                d="M390.646,92.769c-3.445-0.855-7.014,0.818-8.559,4.012c-13.683,28.271-34.928,52.182-61.439,69.148   c-27.219,17.418-58.771,26.625-91.244,26.625c-37.76,0-73.491-12.146-103.33-35.125C96.948,135,56.257,136.455,29.32,160.888   l-0.76,0.689c-1.396,1.266-2.733,2.581-4.019,3.934c-7.415-12.676-18.262-41.138,2.626-78.593   c2.018-3.617,0.721-8.186-2.896-10.203c-3.62-2.018-8.186-0.72-10.203,2.897c-17.52,31.412-15.512,57.676-10.743,74.177   c3.241,11.216,8.158,19.548,11.518,24.361c-7.862,12.884-11.699,27.954-10.782,43.453c1.351,22.817,12.808,43.504,31.435,56.759   c38.813,27.617,84.59,42.215,132.38,42.215c59.608,0,116.031-22.812,158.874-64.233c42.735-41.316,67.447-96.727,69.583-156.024   C396.461,96.773,394.088,93.624,390.646,92.769z M19.035,220.716c-1.079-18.245,6.065-35.751,19.603-48.028l0.76-0.689   c11.324-10.271,25.698-15.458,40.181-15.458c13.083,0,26.253,4.232,37.343,12.772c1.521,1.171,3.061,2.308,4.609,3.427   c-7.881,4.871-16.987,7.49-26.412,7.49c-3.916,0-7.862-0.468-11.729-1.391c-1.984-0.476-4.083-0.117-5.802,0.989   s-2.911,2.866-3.301,4.873c-3.272,16.808-15.254,31.096-31.27,37.289c-2.89,1.118-4.795,3.897-4.795,6.995   c0,0.133,0.004,0.266,0.01,0.4c-0.04,8.714-2.35,17.24-6.619,24.72C24.209,244.63,19.766,233.066,19.035,220.716z M316.324,245.559   c-40.031,38.702-92.751,60.017-148.448,60.017c-44.655,0-87.424-13.637-123.683-39.437c-0.553-0.394-1.082-0.812-1.62-1.222   c6.038-9.228,9.661-19.894,10.481-30.937c16.22-7.792,28.678-22.166,34.12-39.237c2.643,0.325,5.297,0.489,7.943,0.489   c14.538,0,28.495-4.798,39.89-13.604c28.433,17.017,60.67,25.927,94.396,25.927c35.345,0,69.692-10.025,99.329-28.991   c18.987-12.151,35.492-27.576,48.804-45.475C369.246,175.718,348.126,214.813,316.324,245.559z" />
+            </g>
+          </svg>
+          <p class="font-display uppercase text-2xl font-bold text-ink"
+            x-text="lang === 'hr' ? 'Učitavanje...' : 'Loading...'">Loading…</p>
+        </div>
+      </template>
+      <template x-if="appError">
+        <div class="neo rounded-2xl p-8 text-center max-w-md">
+          <p class="font-display text-coral text-3xl font-black uppercase mb-3"
+            x-text="lang === 'hr' ? 'Greška u podacima' : 'Data Error'">Data Error</p>
+          <p class="text-muted font-semibold text-sm" x-text="appError"></p>
+        </div>
+      </template>
+    </div>
+
+    <template x-if="appConfig">
+      <div>
+
+        <!-- NAV -->
+        <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300" :class="isScrolled ? 'py-2' : 'py-3'"
+          style="background:color-mix(in srgb, var(--color-surface) 85%, transparent);backdrop-filter:blur(16px);box-shadow:0 4px 16px var(--shadow-mid-color),0 -1px 0 var(--shadow-light-color);">
+          <div class="max-w-5xl mx-auto px-4 flex items-center justify-between relative">
+
+            <!-- Logo -->
+            <div @click="goToView('home')"
+              class="font-display text-2xl font-black uppercase cursor-pointer text-ink tracking-tight select-none">
+              La<span class="text-coral">Maria</span>.
+            </div>
+
+            <!-- Desktop links (center) -->
+            <div class="hidden md:flex items-center gap-6">
+              <template x-for="id in ['flavors','story']" :key="id">
+                <button @click="scrollToSection(id)"
+                  class="font-display text-sm font-bold uppercase tracking-wide text-ink hover:text-coral transition-colors cursor-pointer bg-transparent border-none"
+                  x-text="tr.nav?.[id]"></button>
+              </template>
+              <button @click="goToBlog()"
+                class="font-display text-sm font-bold uppercase tracking-wide text-coral hover:text-coral-dark transition-colors cursor-pointer bg-transparent border-none"
+                x-text="tr.nav?.blog"></button>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-2">
+              <button @click="darkMode = !darkMode"
+                class="neo-sm rounded-xl p-2.5 bg-surface hover:text-coral transition-colors"
+                title="Toggle Dark Mode">
+                <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <svg x-show="darkMode" style="display:none" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              </button>
+              <button @click="toggleLang"
+                class="neo-sm rounded-xl px-3 py-2 font-display text-sm font-bold uppercase text-ink hover:text-coral transition-colors bg-surface"
+                x-text="lang==='en'?'HR':'EN'"></button>
+              <button @click="isCartOpen=true;isMobileMenuOpen=false"
+                class="neo-sm rounded-xl p-2.5 relative bg-surface hover:text-coral transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                  <path d="M3 6h18" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                <span x-show="cartCount>0"
+                  class="absolute -top-1 -right-1 w-5 h-5 bg-coral text-white text-xs font-bold rounded-full flex items-center justify-center"
+                  x-text="cartCount"></span>
+              </button>
+              <button @click="isMobileMenuOpen=!isMobileMenuOpen" class="md:hidden neo-sm rounded-xl p-2.5 bg-surface">
+                <svg x-show="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <line x1="4" x2="20" y1="6" y2="6" />
+                  <line x1="4" x2="20" y1="12" y2="12" />
+                  <line x1="4" x2="20" y1="18" y2="18" />
+                </svg>
+                <svg x-show="isMobileMenuOpen" style="display:none" xmlns="http://www.w3.org/2000/svg" width="22"
+                  height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="absolute top-full left-0 w-full md:hidden transition-all duration-300 overflow-hidden"
+              :style="isMobileMenuOpen ? 'max-height:300px;opacity:1' : 'max-height:0;opacity:0'"
+              style="background:color-mix(in srgb, var(--color-surface) 97%, transparent);backdrop-filter:blur(16px);box-shadow:0 8px 20px var(--shadow-mid-color);">
+              <div class="flex flex-col items-center gap-5 py-6">
+                <template x-for="id in ['flavors','story']" :key="id">
+                  <button @click="scrollToSection(id);isMobileMenuOpen=false"
+                    class="font-display text-lg font-bold uppercase text-ink hover:text-coral transition-colors bg-transparent border-none cursor-pointer"
+                    x-text="tr.nav?.[id]"></button>
+                </template>
+                <button @click="goToBlog();isMobileMenuOpen=false"
+                  class="font-display text-lg font-bold uppercase text-coral bg-transparent border-none cursor-pointer"
+                  x-text="tr.nav?.blog"></button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- CART DRAWER -->
+        <div x-show="isCartOpen" style="position:relative;z-index:60;">
+          <div x-show="isCartOpen" x-transition:enter="transition duration-200" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" class="fixed inset-0"
+            style="background:rgba(44,44,58,0.45);backdrop-filter:blur(4px);" @click="isCartOpen=false"></div>
+          <div class="fixed top-0 right-0 h-full w-full max-w-sm flex flex-col transition-transform duration-300"
+            :class="isCartOpen?'translate-x-0':'translate-x-full'"
+            style="background:var(--color-surface);box-shadow:-8px 0 32px var(--shadow-mid-color);">
+            <div class="flex justify-between items-center p-5 border-b border-white/60" style="background:var(--color-surface-dark);">
+              <h2 class="font-display text-2xl font-black uppercase text-ink" x-text="tr.cart?.title"></h2>
+              <button @click="isCartOpen=false"
+                class="neo-sm rounded-xl p-2 bg-surface hover:text-coral transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+              <div x-show="cart.length===0" class="text-center py-12 text-muted font-bold uppercase text-sm"
+                x-text="tr.cart?.empty"></div>
+              <template x-for="item in cart" :key="item.id">
+                <div class="neo-sm rounded-2xl p-3 flex gap-3 bg-surface">
+                  <img :src="item.image" class="w-16 h-16 rounded-xl object-contain">
+                  <div class="flex-1 flex flex-col justify-between">
+                    <div class="flex justify-between font-bold text-sm text-ink">
+                      <span x-text="tr.products?.[item.translationKey]?.name"></span>
+                      <span class="text-coral" x-text="'€'+(item.price*item.qty).toFixed(2)"></span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-2">
+                      <button @click="updateCartQty(item.id,-1)"
+                        class="neo-sm rounded-lg w-7 h-7 flex items-center justify-center text-sm font-bold bg-surface hover:text-coral">−</button>
+                      <span
+                        class="neo-inset rounded-lg w-8 h-7 flex items-center justify-center text-xs font-bold bg-surface"
+                        x-text="item.qty"></span>
+                      <button @click="updateCartQty(item.id,1)"
+                        class="neo-sm rounded-lg w-7 h-7 flex items-center justify-center text-sm font-bold bg-surface hover:text-coral">+</button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <div class="p-5 border-t border-white/60" style="background:var(--color-surface-dark);">
+              <div class="flex justify-between font-display text-2xl font-black text-ink mb-4">
+                <span x-text="tr.cart?.total"></span>
+                <span class="text-coral" x-text="'€'+cartTotal"></span>
+              </div>
+              <button @click="handleCheckout"
+                class="w-full neo-btn rounded-2xl py-4 font-display font-black uppercase text-white text-base tracking-wide transition-all bg-coral hover:bg-[#c43e2a]"
+                x-text="tr.cart?.checkout"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN -->
+        <main style="padding-top:4.5rem;">
+
+          <!-- ===== HOME VIEW ===== -->
+          <div x-show="view==='home'">
+
+            <!-- HERO -->
+            <section id="home"
+              class="min-h-[75vh] md:h-[1080px] flex items-center justify-center pt-[100px] pb-24 md:pt-[140px] md:pb-32 relative overflow-hidden"
+              style="perspective: 1000px;">
+              <!-- Floating Depth Images -->
+              <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 0;">
+                <!-- Top left -->
+                <div class="absolute top-[0%] left-[-15%] md:left-[5%] w-28 md:w-80 animate-jump-down"
+                  style="animation-delay: 0.1s;">
+                  <img src="https://form.lamariasalsa.com/assets/images/image01.png" alt=""
+                    class="w-full rotate-[-12deg] opacity-90 drop-shadow-[0_40px_40px_rgba(0,0,0,0.15)] animate-float-1"
+                    style="animation-delay: 0s; filter: blur(3px);">
+                </div>
+                <!-- Top right small -->
+                <div class="absolute top-[5%] right-[5%] w-16 md:w-28 animate-jump-down"
+                  style="animation-delay: 0.25s;">
+                  <img src="https://form.lamariasalsa.com/assets/images/image01.png" alt=""
+                    class="w-full rotate-[15deg] opacity-80 drop-shadow-[0_20px_20px_rgba(0,0,0,0.15)] animate-float-2"
+                    style="animation-delay: 1.5s; filter: blur(2px);">
+                </div>
+                <!-- Center right mid -->
+                <div class="absolute top-[30%] right-[-10%] md:right-[2%] w-24 md:w-48 animate-jump-down"
+                  style="animation-delay: 0.45s;">
+                  <img src="https://form.lamariasalsa.com/assets/images/image01.png" alt=""
+                    class="w-full rotate-[-5deg] opacity-95 drop-shadow-[0_40px_40px_rgba(0,0,0,0.15)] animate-float-3"
+                    style="animation-delay: 0.5s; filter: blur(1px);">
+                </div>
+                <!-- Bottom right giant -->
+                <div
+                  class="absolute -bottom-[10%] md:-bottom-[15%] -right-[15%] md:-right-[5%] w-[160px] md:w-[400px] z-20 animate-jump-down"
+                  style="animation-delay: 0.65s;">
+                  <img src="https://form.lamariasalsa.com/assets/images/image01.png" alt=""
+                    class="w-full rotate-[18deg] opacity-100 drop-shadow-[0_50px_60px_rgba(0,0,0,0.25)] animate-float-1"
+                    style="animation-delay: 2s;">
+                </div>
+                <!-- Bottom left mid -->
+                <div class="absolute bottom-[2%] left-[-10%] md:left-[8%] w-24 md:w-56 z-10 animate-jump-down"
+                  style="animation-delay: 0.55s;">
+                  <img src="https://form.lamariasalsa.com/assets/images/image01.png" alt=""
+                    class="w-full rotate-[-25deg] opacity-85 drop-shadow-[0_30px_35px_rgba(0,0,0,0.2)] animate-float-2"
+                    style="animation-delay: 1.2s; filter: blur(2.5px);">
+                </div>
+
+                <!-- Sparkles -->
+                <div
+                  class="absolute top-[75%] right-[25%] text-[#cccccc] text-4xl opacity-60 font-display rotate-[15deg]">
+                  ✦</div>
+                <div
+                  class="absolute top-[20%] left-[25%] text-[#cccccc] text-2xl opacity-60 font-display rotate-[30deg]">✦
+                </div>
+              </div>
+
+              <div class="max-w-5xl mx-auto w-full flex flex-col items-center text-center relative"
+                style="z-index: 10;">
+                <div class="reveal w-full max-w-4xl mx-auto px-4 mt-12 md:mt-0">
+                  <h2
+                    class="font-sans text-xs md:text-sm font-bold text-muted uppercase tracking-[0.2em] md:tracking-widest mb-4"
+                    x-text="tr.hero?.subtitle"></h2>
+
+                  <h1 class="font-display font-black uppercase leading-[0.85] mb-10 md:mb-12"
+                    style="font-size:clamp(3rem, 10vw, 9rem); letter-spacing: -0.02em;">
+                    <span class="text-ink drop-shadow-sm" style="display:inline-block;"
+                      x-text="tr.hero?.title_start"></span>
+                    <span class="text-ink drop-shadow-sm ml-2 md:ml-4" style="display:inline-block;"
+                      x-text="tr.hero?.title_mid"></span><br>
+                    <span class="text-[#B52B20] drop-shadow-md" style="display:inline-block;"
+                      x-text="tr.hero?.title_end"></span>
+                  </h1>
+
+                  <div class="flex flex-wrap justify-center gap-4 mt-12 md:mt-16 pb-12 md:pb-16">
+                    <button @click="scrollToSection('flavors')"
+                      class="neo-btn rounded-xl px-6 md:px-8 pt-2.5 pb-2 md:pt-3 md:pb-2 font-display font-black uppercase text-white text-sm tracking-widest transition-transform hover:scale-105 active:scale-95"
+                      style="background-color: #B52B20;" x-text="tr.hero?.cta_main"></button>
+                    <button @click="scrollToSection('story')"
+                      class="neo rounded-xl px-6 md:px-8 pt-2.5 pb- md:pt-3 md:pb-1 font-display font-black uppercase text-ink text-sm tracking-widest bg-surface hover:text-[#B52B20] transition-colors"
+                      x-text="tr.hero?.cta_sec"></button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- MARQUEE 1 -->
+            <div class="-mt-28 md:-mt-20 z-20 relative animate-kickflip" style="animation-delay: 1.1s;">
+              <div class="py-6 md:py-8 overflow-hidden shadow-2xl"
+                style="background:linear-gradient(135deg,#e8553e,#c43e2a);transform:rotate(1.2deg) scale(1.05) translateZ(0);">
+                <div
+                  class="flex whitespace-nowrap font-display text-white font-black uppercase tracking-widest text-2xl md:text-4xl italic animate-marquee"
+                  style="width:max-content;">
+                  <span class="pr-12 md:pr-16" x-text="(tr.marquee || '') + ' ' + (tr.marquee || '')"></span>
+                  <span class="pr-12 md:pr-16" x-text="(tr.marquee || '') + ' ' + (tr.marquee || '')"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROCESS -->
+            <section id="process" class="section-pad">
+              <div class="max-w-5xl mx-auto">
+                <div class="text-center md:mb-16 mb-12 reveal">
+                  <span class="font-display text-sm font-bold uppercase text-coral tracking-widest inline-block mb-2"
+                    x-text="tr.process?.badge"></span>
+                  <h2 class="font-display font-black uppercase text-4xl md:text-6xl text-ink tracking-tight mb-4">
+                    <span x-text="tr.process?.title"></span> <span class="text-coral"
+                      x-text="tr.process?.title_accent"></span>
+                  </h2>
+                  <p class="font-semibold text-muted text-lg max-w-2xl mx-auto" x-text="tr.process?.desc"></p>
+                </div>
+
+                <div class="relative mt-12 md:mt-24 pb-12">
+                  <!-- Dashed Wavy Line Background -->
+                  <div class="absolute top-[32px] -translate-y-1/2 left-0 w-full z-0 hidden md:block pointer-events-none text-muted/30">
+                    <svg class="w-full drop-shadow-sm" viewBox="0 -20 1000 80" fill="none" preserveAspectRatio="none" style="height: 60px;">
+                      <path d="M 0 20 Q 125 -20, 250 20 T 500 20 T 750 20 T 1000 20" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 16" vector-effect="non-scaling-stroke" />
+                    </svg>
+                  </div>
+
+                  <div class="relative grid grid-cols-2 md:grid-cols-4 gap-y-16 gap-x-8 md:gap-12">
+                    <template x-for="(step, index) in tr.process_steps" :key="index">
+                      <div class="flex flex-col items-center text-center group cursor-pointer relative z-10 w-full" tabindex="0">
+                        
+                        <!-- Number Circle -->
+                        <div class="flex items-center justify-center w-16 h-16 bg-surface neo-sm rounded-full text-ink font-display font-black text-2xl group-hover:text-coral transition-colors z-20">
+                          <span x-text="index + 1"></span>
+                        </div>
+                        
+                        <!-- Tooltip Modal -->
+                        <div class="absolute bottom-[calc(100%+15px)] left-1/2 -translate-x-1/2 w-72 opacity-0 pointer-events-none group-hover:opacity-100 group-focus:opacity-100 group-hover:pointer-events-auto group-focus:pointer-events-auto transition-all duration-300 z-50 translate-y-4 group-hover:-translate-y-2 group-focus:-translate-y-2">
+                          <div class="neo-lg rounded-[2rem] p-5 bg-surface text-left border border-white/20">
+                            <img :src="step.img" class="w-full h-40 object-cover rounded-2xl mb-4 shadow-sm">
+                            <div class="flex items-center gap-3 mb-3">
+                              <div class="w-8 h-8 rounded-full bg-coral text-white flex items-center justify-center font-display font-bold text-sm shrink-0 shadow-md">
+                                <span x-text="index + 1"></span>
+                              </div>
+                              <h3 class="font-display font-black uppercase text-xl text-ink leading-tight" x-text="step.title"></h3>
+                            </div>
+                            <p class="text-sm text-muted font-semibold leading-relaxed" x-text="step.desc"></p>
+                          </div>
+                        </div>
+
+                        <!-- Step Title -->
+                        <h3 class="mt-6 text-xl md:text-2xl font-display font-black uppercase text-ink group-hover:text-coral transition-colors" x-text="step.title"></h3>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- PRODUCTS -->
+            <section id="flavors" class="section-pad">
+              <div class="max-w-5xl mx-auto">
+                <div class="text-center md:mb-16 mb-12 reveal">
+                  <h2 class="font-display font-black uppercase text-4xl md:text-6xl text-ink tracking-tight"
+                    x-text="tr.products?.title"></h2>
+                  <div class="w-12 h-1.5 bg-coral mx-auto mt-6 rounded-full"></div>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <template x-for="product in products" :key="product.id">
+                    <div
+                      class="neo-sm rounded-3xl p-6 flex flex-col bg-surface group hover:scale-[1.02] transition-all duration-300">
+                      <!-- Image -->
+                      <div class="rounded-2xl p-4 mb-5 aspect-square flex items-center justify-center">
+                        <img :src="product?.image" :alt="tr.products?.[product?.translationKey]?.name"
+                          class="w-full h-full object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <!-- Spice dots -->
+                      <div class="flex gap-1 mb-3">
+                        <template x-for="n in 5" :key="n">
+                          <span class="w-2.5 h-2.5 rounded-full transition-colors"
+                            :class="n<=product.spiceLevel?'bg-coral':'neo-inset'"
+                            :style="n<=product.spiceLevel?'':'box-shadow:inset 2px 2px 4px #c8cad4,inset -2px -2px 4px #fff'"></span>
+                        </template>
+                      </div>
+                      <h3 class="font-display font-black uppercase text-xl text-ink mb-2"
+                        x-text="tr.products?.[product?.translationKey]?.name"></h3>
+                      <p class="text-muted font-semibold text-sm flex-1 mb-5 leading-relaxed"
+                        x-text="tr.products?.[product?.translationKey]?.desc"></p>
+                      <div class="flex items-center justify-between">
+                        <span class="font-display text-2xl font-bold text-coral"
+                          x-text="'€'+product?.price?.toFixed(2)"></span>
+                        <button @click="addToCart(product)"
+                          class="neo-btn rounded-2xl px-5 py-2.5 font-display font-black uppercase text-white text-sm bg-coral hover:bg-[#c43e2a] transition-all flex items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14" />
+                            <path d="M12 5v14" />
+                          </svg>
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </section>
+
+            <!-- MARQUEE 2 -->
+            <div class="py-6 md:py-8 overflow-hidden relative shadow-2xl"
+              style="background:linear-gradient(135deg,#2d2d3a,#1a1a2e);transform:rotate(-1.2deg) scale(1.05);">
+              <div
+                class="flex whitespace-nowrap font-display text-white/70 font-black uppercase tracking-widest text-2xl md:text-4xl italic animate-marquee-rev"
+                style="width:max-content;">
+                <span class="pr-12 md:pr-16" x-text="(tr.marquee || '') + ' ' + (tr.marquee || '')"></span>
+                <span class="pr-12 md:pr-16" x-text="(tr.marquee || '') + ' ' + (tr.marquee || '')"></span>
+              </div>
+            </div>
+
+            <!-- STORY / BENTO -->
+            <section id="story" class="section-pad">
+              <div class="max-w-5xl mx-auto px-4">
+                <div
+                  class="reveal grid grid-cols-1 md:grid-cols-4 md:grid-rows-4 gap-6 auto-rows-[minmax(200px,auto)] md:auto-rows-[113px] lg:auto-rows-[113px]">
+
+                  <!-- Bento 1: Mexico Born -->
+                  <div
+                    class="neo rounded-3xl p-8 md:col-span-2 md:row-span-2 flex flex-col justify-center relative overflow-hidden group">
+                    <h2 class="font-display font-black uppercase text-4xl md:text-5xl text-ink leading-tight z-10"
+                      x-text="tr.story_bento?.box1_title"></h2>
+                    <p class="text-muted font-semibold leading-relaxed mt-4 z-10 max-w-sm"
+                      x-text="tr.story_bento?.box1_desc"></p>
+                    <div
+                      class="absolute -right-8 -bottom-10 text-coral/5 font-display font-black text-[12rem] leading-none select-none tracking-tighter group-hover:scale-110 transition-transform duration-500">
+                      MX</div>
+                  </div>
+
+                  <!-- Bento 2: Image Highlight box -->
+                  <div
+                    class="neo rounded-3xl md:col-span-1 md:row-span-4 relative overflow-hidden p-6 flex flex-col items-center justify-center group"
+                    style="background:#e8553e;">
+                    <img src="https://form.lamariasalsa.com/assets/images/image04.png" alt="Chiles"
+                      class="w-full h-full object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-500 relative z-10">
+                  </div>
+
+                  <!-- Bento 3: Croatia Made -->
+                  <div
+                    class="neo rounded-3xl p-8 md:col-span-1 md:row-span-4 flex flex-col justify-between group overflow-hidden relative">
+                    <div class="z-10">
+                      <h2 class="font-display font-black uppercase text-4xl md:text-5xl text-coral leading-tight"
+                        x-text="tr.story_bento?.box2_title"></h2>
+                      <p class="text-muted font-semibold leading-relaxed mt-4" x-text="tr.story_bento?.box2_desc"></p>
+                    </div>
+                    <div class="text-right mt-8 relative z-10">
+                      <span
+                        class="inline-block p-4 rounded-full neo-sm group-hover:text-coral transition-colors bg-surface">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 2v20" />
+                          <path d="m17 5-5-3-5 3" />
+                          <path d="m17 19-5 3-5-3" />
+                          <path d="M2 12h20" />
+                          <path d="m5 7-3 5 3 5" />
+                          <path d="m19 7 3 5-3 5" />
+                        </svg>
+                      </span>
+                    </div>
+                    <div
+                      class="absolute -left-10 -bottom-10 text-ink/5 font-display font-black text-[12rem] leading-none select-none tracking-tighter group-hover:scale-110 transition-transform duration-500">
+                      HR</div>
+                  </div>
+
+                  <!-- Bento 4: Hand Box -->
+                  <div
+                    class="neo rounded-3xl p-6 flex flex-col justify-center items-center text-center md:col-span-1 md:row-span-2 group bg-surface">
+                    <p class="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm">🤲
+                    </p>
+                    <p class="font-display font-black text-xl md:text-2xl uppercase tracking-widest text-ink"
+                      x-text="tr.story_bento?.box3"></p>
+                  </div>
+
+                  <!-- Bento 5: Small Stat Top -->
+                  <div
+                    class="neo rounded-3xl p-4 flex items-center justify-center text-center md:col-span-1 md:row-span-1 group bg-surface">
+                    <p class="font-display font-black text-sm md:text-base uppercase tracking-widest text-ink group-hover:text-coral transition-colors"
+                      x-text="tr.story_bento?.box4"></p>
+                  </div>
+
+                  <!-- Bento 6: Small Stat Bottom -->
+                  <div
+                    class="neo rounded-3xl p-4 flex items-center justify-center text-center md:col-span-1 md:row-span-1 group bg-surface">
+                    <p class="font-display font-black text-xs md:text-sm uppercase tracking-widest text-muted group-hover:text-ink transition-colors"
+                      x-text="tr.story_bento?.box5"></p>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            <!-- TESTIMONIALS (MARQUEE ROLLING WALL) -->
+            <section id="testimonials" class="section-pad pb-32">
+              <div class="max-w-full mx-auto overflow-hidden relative">
+                
+                <div class="text-center md:mb-16 mb-12 px-4 reveal">
+                  <h2 class="font-display font-black uppercase text-4xl md:text-6xl text-ink tracking-tight"
+                    x-text="tr.testimonials?.title"></h2>
+                  <div class="w-12 h-1.5 bg-coral mx-auto mt-6 rounded-full"></div>
+                </div>
+
+                <div class="flex flex-col gap-6 w-full">
+
+                  <!-- Top Row (Right to Left) -->
+                  <div style="mask-image:linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image:linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)"
+                      class="relative flex overflow-hidden shrink-0 w-full hover:[&>div]:[animation-play-state:paused]">
+                    <div class="animate-marquee flex flex-nowrap w-max gap-6 pr-6">
+                      <!-- 2 Sets for Seamless Loop -->
+                      <template x-for="set in 2">
+                        <template x-for="(testimonial, idx) in tr.testimonials?.items" :key="'r1'+set+idx">
+                          <!-- CARD -->
+                          <div class="neo rounded-3xl flex flex-col justify-between shrink-0 grow-0 md:w-[440px] sm:w-[320px] w-[280px] h-[240px] md:h-[250px] bg-surface p-0 cursor-pointer overflow-hidden z-10 transition-transform duration-300 hover:-translate-y-1 group mt-2 mb-4">
+                            <!-- Text Body -->
+                            <div class="px-6 py-6 md:py-8 flex-1 flex flex-col justify-center">
+                              <p class="italic text-muted font-sans font-semibold text-[15px] md:text-base leading-relaxed" x-text="testimonial.t"></p>
+                            </div>
+                            
+                            <!-- Bottom Footer -->
+                            <div class="flex overflow-hidden h-[75px] shrink-0 gap-0 w-full border-t-[1.5px] border-white/40 dark:border-ink/10 relative transition-colors bg-white/30 dark:bg-ink/5">
+                              <div class="flex items-center w-[75%] gap-4 px-6">
+                                <!-- Avatar -->
+                                <div class="relative w-10 h-10 bg-coral rounded-full flex items-center justify-center text-white shrink-0 shadow-md">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                  </svg>
+                                </div>
+                                <div class="flex flex-col items-start overflow-hidden">
+                                  <h5 class="text-[15px] font-display font-black text-ink uppercase tracking-wide leading-tight truncate w-full" x-text="testimonial.n"></h5>
+                                  <p class="text-[12px] text-muted font-semibold mt-0.5 truncate w-full" x-text="testimonial.d"></p>
+                                </div>
+                              </div>
+                              <div class="w-[1.5px] bg-white/40 dark:bg-ink/10 h-full"></div>
+                              <div class="flex items-center justify-center w-[25%] opacity-70 group-hover:opacity-100 transition-opacity">
+                                <svg width="22" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="text-coral">
+                                  <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </template>
+                      </template>
+                    </div>
+                  </div>
+
+                  <!-- Bottom Row (Left to Right) -->
+                  <div style="mask-image:linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); -webkit-mask-image:linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)"
+                      class="relative flex overflow-hidden shrink-0 w-full hover:[&>div]:[animation-play-state:paused]">
+                    <div class="animate-marquee-rev flex flex-nowrap w-max gap-6 pr-6">
+                      <!-- 2 Sets for Seamless Loop -->
+                      <template x-for="set in 2">
+                        <template x-for="(testimonial, idx) in [...(tr.testimonials?.items || [])].reverse()" :key="'r2'+set+idx">
+                          <!-- CARD -->
+                          <div class="neo rounded-3xl flex flex-col justify-between shrink-0 grow-0 md:w-[440px] sm:w-[320px] w-[280px] h-[240px] md:h-[250px] bg-surface p-0 cursor-pointer overflow-hidden z-10 transition-transform duration-300 hover:-translate-y-1 group mt-2 mb-4">
+                            <!-- Text Body -->
+                            <div class="px-6 py-6 md:py-8 flex-1 flex flex-col justify-center">
+                              <p class="italic text-muted font-sans font-semibold text-[15px] md:text-base leading-relaxed" x-text="testimonial.t"></p>
+                            </div>
+                            
+                            <!-- Bottom Footer -->
+                            <div class="flex overflow-hidden h-[75px] shrink-0 gap-0 w-full border-t-[1.5px] border-white/40 dark:border-ink/10 relative transition-colors bg-white/30 dark:bg-ink/5">
+                              <div class="flex items-center w-[75%] gap-4 px-6">
+                                <!-- Avatar -->
+                                <div class="relative w-10 h-10 bg-coral rounded-full flex items-center justify-center text-white shrink-0 shadow-md">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                  </svg>
+                                </div>
+                                <div class="flex flex-col items-start overflow-hidden">
+                                  <h5 class="text-[15px] font-display font-black text-ink uppercase tracking-wide leading-tight truncate w-full" x-text="testimonial.n"></h5>
+                                  <p class="text-[12px] text-muted font-semibold mt-0.5 truncate w-full" x-text="testimonial.d"></p>
+                                </div>
+                              </div>
+                              <div class="w-[1.5px] bg-white/40 dark:bg-ink/10 h-full"></div>
+                              <div class="flex items-center justify-center w-[25%] opacity-70 group-hover:opacity-100 transition-opacity">
+                                <svg width="22" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="text-coral">
+                                  <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path>
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </template>
+                      </template>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!-- GALLERY -->
+            <section id="gallery" class="section-pad">
+              <div class="max-w-5xl mx-auto px-4">
+                <div class="text-center md:mb-16 mb-12 reveal">
+                  <h2 class="font-display font-black uppercase text-4xl md:text-6xl text-ink tracking-tight"
+                    x-text="tr.gallery?.title"></h2>
+                  <div class="w-12 h-1.5 bg-coral mx-auto mt-6 rounded-full"></div>
+                </div>
+                <!-- 3 Column Masonry Grid -->
+                <div class="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6">
+                  <template x-for="(img, i) in appConfig?.galleryImages" :key="i">
+                    <!-- Gallery Item wrapper avoiding breaking across columns -->
+                    <div
+                      class="break-inside-avoid reveal neo sm:rounded-3xl p-4 bg-surface group hover:-translate-y-1 transition-transform duration-300"
+                      :style="'transition-delay:'+((i%3)*50)+'ms'">
+                      <img :src="img.src" class="w-full object-cover rounded-2xl" :class="img.aspect" loading="lazy">
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq" class="section-pad">
+              <div class="max-w-5xl mx-auto">
+                <div class="text-center md:mb-16 mb-12 reveal">
+                  <h2 class="font-display font-black uppercase text-4xl md:text-6xl text-ink tracking-tight"
+                    x-text="tr.faq?.title"></h2>
+                  <div class="w-12 h-1.5 bg-coral mx-auto mt-6 rounded-full"></div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-5 items-start">
+                  <template x-for="(faqItem, i) in (Array.isArray(tr.faq?.items) ? tr.faq.items : [])" :key="i">
+                    <div x-data="{open:false}"
+                      class="neo rounded-2xl overflow-hidden bg-surface transition-all duration-300"
+                      :class="open?'neo-lg':''">
+                      <button @click="open=!open"
+                        class="w-full flex justify-between items-center p-5 bg-transparent border-none cursor-pointer text-left group">
+                        <span
+                          class="font-display font-bold uppercase text-ink group-hover:text-coral transition-colors text-base pr-4"
+                          x-text="faqItem.q"></span>
+                        <span
+                          class="neo-sm rounded-xl w-10 h-10 flex items-center justify-center flex-shrink-0 ml-3 bg-surface">
+                          <svg class="w-6 h-6 transition-transform duration-300"
+                            :style="open ? 'transform: rotate(135deg)' : 'transform: rotate(' + [15, -18, 20, -15, 18, -20][i % 6] + 'deg)'"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                            viewBox="0 0 396.338 396.338" xml:space="preserve">
+                            <g>
+                              <path style="fill:#9AD14B;"
+                                d="M134.345,172.389c-10.31,9.53-24.09,15.34-39.23,15.34c-4.64,0-9.15-0.56-13.47-1.59   c-2.2,11.31-7.69,21.44-15.45,29.35c-5.73,5.85-12.69,10.49-20.47,13.5c0,0.05,0.01,0.11,0.01,0.17c0,14.05-5.01,26.93-13.35,36.95   c-24.52-23.25-27.81-61.23-8.34-88.29c2.73-3.8,5.91-7.39,9.55-10.69l0.76-0.69c7.81-7.08,16.87-12,26.43-14.75   c20.33-5.88,42.95-1.99,60.71,11.68C125.635,166.559,129.925,169.569,134.345,172.389z" />
+                              <path style="fill:#F95428;"
+                                d="M388.835,100.049c-4.26,118.37-101.55,213.03-220.96,213.03c-15.8,0-31.21-1.66-46.06-4.8   c-30.03-6.37-57.8-18.83-81.97-36.03c-2.67-1.9-5.16-3.95-7.46-6.14c8.34-10.02,13.35-22.9,13.35-36.95c0-0.06-0.01-0.12-0.01-0.17   c18.3-7.08,32.09-23.17,35.92-42.85c4.32,1.03,8.83,1.59,13.47,1.59c15.14,0,28.92-5.81,39.23-15.34   c27.46,17.52,60.07,27.67,95.06,27.67C299.565,200.059,360.195,159.239,388.835,100.049z" />
+                              <path style="fill:#90BC42;"
+                                d="M45.725,228.989c0,0.05,0.01,0.11,0.01,0.17c0,14.05-5.01,26.93-13.35,36.95   c-24.52-23.25-27.81-61.23-8.34-88.29c2.73-3.8,5.91-7.39,9.55-10.69l0.76-0.69c7.81-7.08,16.87-12,26.43-14.75l0.37,1.75   c0,0-24,32,5,62c0.02,0.02,0.03,0.03,0.04,0.05C60.465,221.339,53.505,225.979,45.725,228.989z" />
+                              <path style="fill:#E54728;"
+                                d="M121.815,308.279c-30.03-6.37-57.8-18.83-81.97-36.03c-2.67-1.9-5.16-3.95-7.46-6.14   c8.34-10.02,13.35-22.9,13.35-36.95c0-0.06-0.01-0.12-0.01-0.17c18.3-7.08,32.09-23.17,35.92-42.85c4.32,1.03,8.83,1.59,13.47,1.59   C95.115,187.729,58.055,275.319,121.815,308.279z" />
+                              <path style="fill:#FFFFFF;"
+                                d="M229.405,230.559c-25.702,0-50.823-4.662-74.666-13.856c-3.865-1.49-5.79-5.831-4.3-9.696   c1.491-3.865,5.829-5.791,9.696-4.299c22.114,8.527,45.42,12.851,69.27,12.851c36.875,0,72.713-10.461,103.64-30.253   c1.078-0.69,2.146-1.388,3.208-2.098c3.445-2.301,8.102-1.377,10.403,2.066c2.303,3.443,1.378,8.101-2.065,10.403   c-1.146,0.766-2.298,1.519-3.46,2.263C307.786,219.279,269.151,230.559,229.405,230.559z" />
+                              <circle style="fill:#FFFFFF;" cx="135.817" cy="199.954" r="7.5" />
+                              <path style="fill:#333333;"
+                                d="M390.646,92.769c-3.445-0.855-7.014,0.818-8.559,4.012c-13.683,28.271-34.928,52.182-61.439,69.148   c-27.219,17.418-58.771,26.625-91.244,26.625c-37.76,0-73.491-12.146-103.33-35.125C96.948,135,56.257,136.455,29.32,160.888   l-0.76,0.689c-1.396,1.266-2.733,2.581-4.019,3.934c-7.415-12.676-18.262-41.138,2.626-78.593   c2.018-3.617,0.721-8.186-2.896-10.203c-3.62-2.018-8.186-0.72-10.203,2.897c-17.52,31.412-15.512,57.676-10.743,74.177   c3.241,11.216,8.158,19.548,11.518,24.361c-7.862,12.884-11.699,27.954-10.782,43.453c1.351,22.817,12.808,43.504,31.435,56.759   c38.813,27.617,84.59,42.215,132.38,42.215c59.608,0,116.031-22.812,158.874-64.233c42.735-41.316,67.447-96.727,69.583-156.024   C396.461,96.773,394.088,93.624,390.646,92.769z M19.035,220.716c-1.079-18.245,6.065-35.751,19.603-48.028l0.76-0.689   c11.324-10.271,25.698-15.458,40.181-15.458c13.083,0,26.253,4.232,37.343,12.772c1.521,1.171,3.061,2.308,4.609,3.427   c-7.881,4.871-16.987,7.49-26.412,7.49c-3.916,0-7.862-0.468-11.729-1.391c-1.984-0.476-4.083-0.117-5.802,0.989   s-2.911,2.866-3.301,4.873c-3.272,16.808-15.254,31.096-31.27,37.289c-2.89,1.118-4.795,3.897-4.795,6.995   c0,0.133,0.004,0.266,0.01,0.4c-0.04,8.714-2.35,17.24-6.619,24.72C24.209,244.63,19.766,233.066,19.035,220.716z M316.324,245.559   c-40.031,38.702-92.751,60.017-148.448,60.017c-44.655,0-87.424-13.637-123.683-39.437c-0.553-0.394-1.082-0.812-1.62-1.222   c6.038-9.228,9.661-19.894,10.481-30.937c16.22-7.792,28.678-22.166,34.12-39.237c2.643,0.325,5.297,0.489,7.943,0.489   c14.538,0,28.495-4.798,39.89-13.604c28.433,17.017,60.67,25.927,94.396,25.927c35.345,0,69.692-10.025,99.329-28.991   c18.987-12.151,35.492-27.576,48.804-45.475C369.246,175.718,348.126,214.813,316.324,245.559z" />
+                            </g>
+                          </svg>
+                        </span>
+                      </button>
+                      <div x-show="open" x-transition class="px-5 pb-5">
+                        <div class="neo-inset rounded-2xl p-4">
+                          <p class="text-muted font-semibold text-sm leading-relaxed" x-text="faqItem.a"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </section>
+
+            <!-- CTA AFTER FAQ -->
+            <section class="section-pad">
+              <div class="max-w-4xl mx-auto px-4 reveal">
+                <div
+                  class="neo-lg rounded-3xl p-10 md:p-16 text-center bg-surface relative overflow-hidden flex flex-col items-center">
+                  <div class="relative z-10 w-full">
+                    <h2 class="font-display font-black uppercase tracking-tight text-3xl md:text-5xl text-ink mb-8"
+                      x-text="tr.cta_faq?.title"></h2>
+                    <button @click="scrollToSection('flavors')"
+                      class="neo-btn rounded-xl px-10 py-5 font-display font-black uppercase text-white text-lg tracking-widest transition-transform hover:scale-105 active:scale-95 bg-[#B52B20] border-none"
+                      x-text="tr.cta_faq?.btn"></button>
+                  </div>
+                </div>
+            </section>
+          </div>
+          <!-- END HOME -->
+
+          <!-- BLOG INDEX -->
+          <div aria-labelledby="blog-heading" x-show="view==='blog'" class="section-pad max-w-3xl mx-auto" x-cloak>
+            <div class="text-center mb-10">
+              <div class="neo-inset rounded-2xl inline-block px-6 py-2 mb-2">
+                <h1 id="blog-heading" class="font-display font-black uppercase text-3xl text-ink" x-text="tr.blog?.title"></h1>
+              </div>
+            </div>
+            <div role="group" aria-label="Blog categories" class="flex flex-wrap justify-center gap-2 mb-8" x-show="allCategories.length>0">
+              <button @click="filterCategory(null)"
+                :aria-pressed="activeCategory === null"
+                class="rounded-full px-4 py-1.5 text-xs font-display font-bold uppercase transition-all"
+                :class="activeCategory===null?'bg-coral text-white neo-btn':'neo text-ink hover:text-coral bg-surface'"
+                x-text="tr.blog?.all"></button>
+              <template x-for="cat in allCategories" :key="cat">
+                <button @click="filterCategory(cat)"
+                  :aria-pressed="activeCategory === cat"
+                  class="rounded-full px-4 py-1.5 text-xs font-display font-bold uppercase transition-all"
+                  :class="activeCategory===cat?'bg-coral text-white neo-btn':'neo text-ink hover:text-coral bg-surface'"
+                  x-text="cat"></button>
+              </template>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <template x-if="isLoadingPosts">
+                <p class="text-center font-display font-bold uppercase text-muted" x-text="tr.blog?.loading"></p>
+              </template>
+              <template x-for="post in filteredPosts" :key="post.slug">
+                <article :aria-labelledby="'post-title-' + post.slug"
+                  class="neo rounded-3xl overflow-hidden bg-surface group hover:scale-[1.02] transition-all duration-300">
+                  <a href="#" @click.prevent="goToPost(post.slug)" x-show="post?.image"
+                    :aria-label="'Read post: ' + (post?.translations?.[lang]?.title||post?.title)"
+                    class="block overflow-hidden rounded-t-3xl aspect-video">
+                    <img :src="post?.image" :alt="post?.translations?.[lang]?.title||post?.title"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                  </a>
+                  <div class="p-5">
+                    <div class="flex items-center gap-3 mb-3">
+                      <span class="text-coral text-xs font-bold" x-text="post?.date"></span>
+                      <div class="flex gap-1">
+                        <template x-for="cat in (post?.categories||[])" :key="cat">
+                          <span class="neo-inset rounded-full px-2 py-0.5 text-xs font-bold text-muted"
+                            x-text="cat"></span>
+                        </template>
+                      </div>
+                    </div>
+                    <h2 :id="'post-title-' + post.slug" class="font-display font-black uppercase text-xl text-ink mb-2"
+                      x-text="post?.translations?.[lang]?.title||post?.title"></h2>
+                    <p class="text-muted text-sm font-semibold mb-4 leading-relaxed"
+                      x-text="post?.translations?.[lang]?.excerpt||post?.excerpt"></p>
+                    <button @click="goToPost(post.slug)"
+                      :aria-label="'Read post: ' + (post?.translations?.[lang]?.title||post?.title)"
+                      class="neo-btn rounded-2xl px-5 py-2 font-display font-bold uppercase text-white text-xs bg-coral hover:bg-[#c43e2a] transition-all"
+                      x-text="tr.blog?.read_post"></button>
+                  </div>
+                </article>
+              </template>
+              <template x-if="!isLoadingPosts&&filteredPosts.length===0">
+                <p class="text-muted font-semibold col-span-2 text-center py-8" x-text="tr.blog?.no_posts"></p>
+              </template>
+            </div>
+          </div>
+
+          <!-- SINGLE POST -->
+          <div aria-live="polite" x-show="view==='post'" class="section-pad max-w-3xl mx-auto" x-cloak>
+            <button @click="goToBlog(activeCategory)" aria-label="Back to blog"
+              class="flex items-center gap-2 font-display font-bold uppercase text-sm text-ink hover:text-coral transition-colors mb-8 neo-sm rounded-2xl px-4 py-2 bg-surface">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19-7-7 7-7" />
+                <path d="M19 12H5" />
+              </svg>
+              <span x-text="tr.blog?.back"></span>
+            </button>
+            <template x-if="currentPost">
+              <article aria-labelledby="single-post-heading" class="neo rounded-3xl overflow-hidden bg-surface">
+                <div x-show="currentPost?.image"
+                  class="rounded-3xl p-4 m-4 md:m-8 mb-2 md:mb-4 flex items-center justify-center">
+                  <img :src="currentPost?.image" :alt="currentPost?.translations?.[lang]?.title||currentPost?.title"
+                    class="w-full h-64 md:h-96 object-cover rounded-2xl drop-shadow-md">
+                </div>
+                <div class="p-6 md:p-10 pt-4 md:pt-6">
+                  <div class="flex items-center gap-3 mb-4">
+                    <span class="text-coral text-sm font-bold" x-text="currentPost?.date"></span>
+                    <template x-for="cat in (currentPost?.categories||[])" :key="cat">
+                      <button @click="goToBlog(cat)" :aria-label="'Category: ' + cat"
+                        class="neo-inset rounded-full px-3 py-0.5 text-xs font-bold uppercase text-muted"
+                        x-text="cat"></button>
+                    </template>
+                  </div>
+                  <h1 id="single-post-heading" class="font-display font-black uppercase leading-tight mb-6 text-ink"
+                    style="font-size:clamp(2rem,5vw,3rem);"
+                    x-text="currentPost?.translations?.[lang]?.title||currentPost?.title"></h1>
+                  <div class="neo-inset rounded-2xl p-6 text-muted font-semibold leading-relaxed"
+                    x-html="currentPost?.translations?.[lang]?.content||currentPost?.content"></div>
+                </div>
+              </article>
+            </template>
+            <template x-if="!currentPost&&!isLoadingPosts">
+              <div class="text-center py-16">
+                <p class="font-display font-black uppercase text-3xl text-ink mb-2" x-text="tr.blog?.not_found_title">
+                </p>
+                <p class="text-muted font-semibold" x-text="tr.blog?.not_found_desc"></p>
+              </div>
+            </template>
+          </div>
+
+          <!-- CHECKOUT -->
+          <div x-show="view==='checkout'" class="section-pad max-w-3xl mx-auto" x-cloak>
+            <button @click="goToView('home')"
+              class="flex items-center gap-2 font-display font-bold uppercase text-sm text-ink hover:text-coral transition-colors mb-8 neo-sm rounded-2xl px-4 py-2 bg-surface">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19-7-7 7-7" />
+                <path d="M19 12H5" />
+              </svg>
+              <span x-text="tr.checkout?.back"></span>
+            </button>
+            <div class="neo-lg rounded-3xl p-6 md:p-10 bg-surface">
+              <h1
+                class="font-display font-black uppercase text-3xl md:text-4xl text-ink mb-8 pb-5 border-b border-white/50"
+                x-text="tr.checkout?.title"></h1>
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="font-display font-bold uppercase text-lg text-ink mb-4 border-l-4 border-coral pl-3"
+                    x-text="tr.checkout?.summary"></h3>
+                  <div class="flex flex-col gap-2 mb-6">
+                    <template x-for="item in (checkoutBundle?checkoutBundle.items:[])" :key="item.id">
+                      <div class="neo-inset rounded-2xl p-3 flex justify-between items-center">
+                        <span class="font-semibold text-ink text-sm"
+                          x-text="item.qty+'x '+tr.products?.[item.translationKey]?.name"></span>
+                        <span class="font-display font-bold text-coral"
+                          x-text="'€'+(item.price*item.qty).toFixed(2)"></span>
+                      </div>
+                    </template>
+                  </div>
+                  <div class="flex justify-between font-display text-2xl font-black text-ink">
+                    <span x-text="tr.checkout?.total"></span>
+                    <span class="text-coral" x-text="checkoutBundle?'€'+checkoutBundle.total:'€0.00'"></span>
+                  </div>
+                </div>
+                <div class="neo-inset rounded-3xl p-6 flex flex-col items-center justify-center text-center">
+                  <div class="text-4xl mb-4">🌶</div>
+                  <h4 class="font-display font-black uppercase text-xl text-ink mb-2"
+                    x-text="tr.checkout?.complete_title"></h4>
+                  <p class="text-muted font-semibold text-sm mb-6 leading-relaxed" x-text="tr.checkout?.complete_desc">
+                  </p>
+                  <button @click="proceedToCarrd($event)"
+                    class="w-full neo-btn rounded-2xl py-4 font-display font-black uppercase text-white text-base bg-coral hover:bg-[#c43e2a] transition-all"
+                    x-text="tr.checkout?.pay"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="section-pad bg-surface border-t border-white/50"
+          style="box-shadow: 0 -12px 30px color-mix(in srgb, var(--shadow-mid-color) 40%, transparent);">
+          <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 mb-16">
+              <!-- Brand Column -->
+              <div class="flex flex-col items-start">
+                <div class="font-display text-5xl md:text-6xl font-black text-ink mb-6 tracking-tight">La<span
+                    class="text-coral">Maria</span>.</div>
+                <div class="text-muted font-sans text-sm md:text-base font-semibold space-y-2">
+                  <p x-text="tr.footer?.est"></p>
+                  <p x-text="tr.footer?.prod"></p>
+                </div>
+              </div>
+
+              <!-- Newsletter Column -->
+              <div class="flex flex-col md:items-end justify-center">
+                <h4 class="font-display text-2xl md:text-3xl font-black text-ink uppercase mb-6 tracking-tight"
+                  x-text="tr.footer?.stay_spicy"></h4>
+                <div class="relative w-full max-w-sm flex p-1.5 neo-inset rounded-2xl bg-surface">
+                  <input :placeholder="tr.footer?.email_placeholder"
+                    class="flex-1 bg-transparent border-none text-ink font-sans font-semibold px-4 outline-none w-full text-sm placeholder:text-muted/70">
+                  <button
+                    class="neo-btn rounded-xl px-5 py-3 text-white bg-coral hover:bg-[#c43e2a] transition-all font-display font-bold uppercase text-sm"
+                    x-text="tr.footer?.join"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-8 border-t border-muted/20 text-center">
+              <p class="text-muted/60 font-sans font-bold text-xs uppercase tracking-widest" x-text="tr.footer?.copy">
+              </p>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </template>
+  </div>
+
+  <!-- Alpine app logic -->
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('app', () => ({
+        appConfig: null, appError: null, lang: 'en', isScrolled: false, isMobileMenuOpen: false, isCartOpen: false,
+        cart: [], view: 'home', checkoutBundle: null, posts: [], currentPost: null, isLoadingPosts: true, activeCategory: null,
+        originalTitle: document.title, darkMode: false,
+        async init() {
+          this.darkMode = localStorage.getItem('darkMode') === 'true' || 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches && localStorage.getItem('darkMode') === null);
+          this.$watch('darkMode', v => {
+              localStorage.setItem('darkMode', v);
+              if(v) document.documentElement.classList.add('dark');
+              else document.documentElement.classList.remove('dark');
+          });
+          if(this.darkMode) document.documentElement.classList.add('dark');
+
+          let t = false;
+          window.addEventListener('scroll', () => { if (!t) { window.requestAnimationFrame(() => { this.isScrolled = window.scrollY > 30; t = false; }); t = true; } }, { passive: true });
+          this.$watch('view', v => { this.isMobileMenuOpen = false; if (v === 'home') setTimeout(() => this.initScrollReveal(), 100); this.updateSEO(); });
+          this.$watch('lang', () => this.updateSEO());
+          this.$watch('currentPost', () => this.updateSEO());
+          try {
+            const r = await fetch('https://raw.githubusercontent.com/kr10o/lamaria/refs/heads/main/data.json');
+            if (r.ok) {
+              const txt = await r.text(); try {
+                const d = JSON.parse(txt);
+                const imgMap = { original: 'https://form.lamariasalsa.com/assets/images/image01.png', chipotle: 'https://form.lamariasalsa.com/assets/images/image02.png', habanero: 'https://form.lamariasalsa.com/assets/images/image03.png' };
+                const postImgMap = { 'history-of-salsa-macha': 'https://form.lamariasalsa.com/assets/images/image04.png', '5-ways-to-eat-salsa-macha': 'https://form.lamariasalsa.com/assets/images/image06.png' };
+                const galleryImages = [
+                  { src: "https://form.lamariasalsa.com/assets/images/image06.png", aspect: "aspect-[3/4]" },
+                  { src: "https://form.lamariasalsa.com/assets/images/image04.png", aspect: "aspect-square" },
+                  { src: "https://form.lamariasalsa.com/assets/images/image03.png", aspect: "aspect-video" },
+                  { src: "https://form.lamariasalsa.com/assets/images/image01.png", aspect: "aspect-square" },
+                  { src: "https://form.lamariasalsa.com/assets/images/image06.png", aspect: "aspect-[4/3]" },
+                  { src: "https://form.lamariasalsa.com/assets/images/image02.png", aspect: "aspect-[3/4]" },
+                  { src: "https://form.lamariasalsa.com/assets/images/image03.png", aspect: "aspect-square" }
+                ];
+                if (d.products) d.products = d.products.map(p => ({ ...p, image: imgMap[p.translationKey] || p.image }));
+                if (d.posts) d.posts = d.posts.map(p => ({ ...p, image: postImgMap[p.slug] || 'https://form.lamariasalsa.com/assets/images/image02.png' }));
+                d.galleryImages = galleryImages;
+
+                if (d.translations) {
+                  const inject = (lang, data) => d.translations[lang] = { ...d.translations[lang], ...data };
+                  inject('en', {
+                    process_steps: [
+                      { title: "Sourcing", desc: "Selecting the finest local sunflower and olive oils, paired with authentic Mexican chiles.", img: "https://form.lamariasalsa.com/assets/images/image02.png" },
+                      { title: "Toasting", desc: "Slow-roasting garlic, seeds, and nuts until perfectly golden and aromatic.", img: "https://form.lamariasalsa.com/assets/images/image04.png" },
+                      { title: "Blending", desc: "Combining the crunchy bits with the infused oil, letting it rest to reach maximum potential.", img: "https://form.lamariasalsa.com/assets/images/image03.png" },
+                      { title: "Bottling", desc: "100% handcrafted and jarred without any artificial preservatives.", img: "https://form.lamariasalsa.com/assets/images/image06.png" }
+                    ],
+                    testimonials: {
+                      title: "WHAT THEY SAY",
+                      items: [
+                        { t: "Best salsa macha I've had outside of Mexico. The crunch is unbelievable.", n: "Marco T.", d: "Verified Buyer, Madrid" },
+                        { t: "I literally put this on my eggs every morning. It's addictive.", n: "Sarah K.", d: "Verified Buyer, London" },
+                        { t: "The Habanero version is no joke. Perfect amount of heat and flavor.", n: "David R.", d: "Verified Buyer, Berlin" }
+                      ]
+                    },
+                    story_bento: {
+                      box1_title: "MEXICO BORN.",
+                      box1_desc: "Our journey began on the vibrant streets of Mexico, surrounded by the explosive colors and deeply roasted aromas of traditional chiles. Every single jar brings a piece of that original heritage perfectly preserved.",
+                      box2_title: "CROATIA MADE.",
+                      box2_desc: "Today, we handcraft our salsa macha in the heart of Croatia. We merged authentic Mexican roasting techniques with an obsessive local passion for fine Mediterranean dining.",
+                      box3: "100% Handcrafted",
+                      box4: "No Preservatives",
+                      box5: "Made weekly in strictly small batches"
+                    },
+                    gallery: { title: "LA MARIA STYLES" },
+                    cta_faq: { title: "READY FOR THE CRUNCH?", btn: "SHOP NOW" },
+                    marquee: "Artisanal • Spicy • Crunchy • Mexican • Handmade • Vegan • Non-GMO •"
+                  });
+                  inject('hr', {
+                    process_steps: [
+                      { title: "Odabir", desc: "Biramo najbolja lokalna ulja i autentične meksičke čilije.", img: "https://form.lamariasalsa.com/assets/images/image02.png" },
+                      { title: "Prženje", desc: "Sporo pečenje češnjaka, sjemenki i orašastih plodova do savršene zlatne boje.", img: "https://form.lamariasalsa.com/assets/images/image04.png" },
+                      { title: "Miješanje", desc: "Spajanje hrskavih komadića s uljem i odmaranje za maksimalan okus.", img: "https://form.lamariasalsa.com/assets/images/image03.png" },
+                      { title: "Pakiranje", desc: "100% ručni rad, bez umjetnih konzervansa.", img: "https://form.lamariasalsa.com/assets/images/image06.png" }
+                    ],
+                    testimonials: {
+                      title: "ŠTO KAŽU O NAMA",
+                      items: [
+                        { t: "Najbolja salsa macha izvan Meksika. Hrskavost je nevjerojatna.", n: "Marko T.", d: "Potvrđeni kupac, Madrid" },
+                        { t: "Doslovno ovo stavljam na jaja svako jutro. Stvara ovisnost.", n: "Sara K.", d: "Potvrđeni kupac, London" },
+                        { t: "Habanero verzija nije šala. Savršena razina ljutine i okusa.", n: "David R.", d: "Potvrđeni kupac, Berlin" }
+                      ]
+                    },
+                    story_bento: {
+                      box1_title: "MEKSIKO ROĐEN.",
+                      box1_desc: "Naše putovanje započelo je na živahnim ulicama Meksika, okruženo eksplozivnim bojama i duboko pečenim aromama tradicionalnih čilija. Svaka staklenka donosi dio tog izvornog naslijeđa.",
+                      box2_title: "HRVATSKA STVOREN.",
+                      box2_desc: "Danas ručno izrađujemo našu salsu u srcu Hrvatske, spajajući autentične meksičke recepte s lokalnom strašću prema finoj hrani. Rezultat je nevjerojatna fuzija dviju kultura.",
+                      box3: "100% Ručni rad",
+                      box4: "Bez Konzervansa",
+                      box5: "Izrađuje se tjedno isključivo u malim serijama"
+                    },
+                    gallery: { title: "LA MARIA VIBRA" },
+                    cta_faq: { title: "SPREMNI ZA HRSKANJE?", btn: "KUPI ODMAH" },
+                    marquee: "Zanatski • Ljuto • Hrskavo • Meksičko • Ručno • Vegansko • Bez GMO-a •"
+                  });
+                }
+
+                this.appConfig = d; this.posts = d.posts || [];
+              } catch (e) { throw new Error('JSON Parse Error: ' + e.message); }
+            }
+            else throw new Error('Failed to load data.json status=' + r.status);
+          } catch (e) { console.error('Failed to fetch data:', e.message); this.appError = e.message; }
+          finally { this.isLoadingPosts = false; setTimeout(() => this.initScrollReveal(), 100); }
+          this.handleRouting();
+          window.addEventListener('popstate', () => this.handleRouting());
+        },
+        get products() { return this.appConfig ? this.appConfig.products : []; },
+        get cartCount() { return this.cart.reduce((a, i) => a + i.qty, 0); },
+        get cartTotal() { return this.cart.reduce((s, i) => s + (i.price * i.qty), 0).toFixed(2); },
+        get allCategories() { const c = new Set(); this.posts.forEach(p => { if (p.categories) p.categories.forEach(x => c.add(x)); }); return Array.from(c); },
+        get filteredPosts() { if (!this.activeCategory) return this.posts; return this.posts.filter(p => p.categories && p.categories.includes(this.activeCategory)); },
+        get tr() { return this.appConfig ? this.appConfig.translations[this.lang] : {}; },
+        toggleLang() { this.lang = this.lang === 'en' ? 'hr' : 'en'; this.isMobileMenuOpen = false; },
+        goToView(v) { this.view = v; document.title = this.originalTitle; this.updateURL(''); window.scrollTo(0, 0); },
+        scrollToSection(id) {
+          this.isMobileMenuOpen = false;
+          if (this.view !== 'home') { this.view = 'home'; this.updateURL(''); }
+          setTimeout(() => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }, 50);
+        },
+        handleRouting() {
+          const p = new URLSearchParams(window.location.search);
+          const slug = p.get('post'), cat = p.get('category');
+          if (slug) this.loadPostBySlug(slug, false);
+          else if (cat) this.goToBlog(cat, false);
+          else { if (this.view !== 'home' && this.view !== 'checkout') { this.view = 'home'; document.title = this.originalTitle; } }
+        },
+        goToBlog(category = null, pushState = true) {
+          this.view = 'blog'; this.activeCategory = category;
+          let title = 'Blog', url = '?blog';
+          if (category) { title = category.toUpperCase() + ' - Blog'; url = '?category=' + category; }
+          document.title = title + ' | ' + this.originalTitle;
+          if (pushState) this.updateURL(url); window.scrollTo(0, 0);
+        },
+        filterCategory(c) { this.goToBlog(c, true); },
+        goToPost(slug) { this.loadPostBySlug(slug, true); },
+        loadPostBySlug(slug, push) {
+          const f = this.posts.find(p => p.slug === slug);
+          if (f) { this.currentPost = f; this.view = 'post'; let t = f?.translations?.[this.lang]?.title || f?.title || 'Blog'; document.title = t + ' | ' + this.originalTitle; if (push) this.updateURL('?post=' + slug); }
+          else { this.currentPost = null; this.view = 'post'; }
+          window.scrollTo(0, 0);
+        },
+        updateURL(q) {
+          try { let b = window.location.origin + window.location.pathname; if (b.startsWith('blob:')) return; window.history.pushState({ path: b + q }, '', b + q); }
+          catch (e) { console.warn('Routing URL update skipped.'); }
+        },
+        addToCart(product) {
+          const e = this.cart.find(p => p.id === product.id);
+          if (e) e.qty++; else this.cart.push({ ...product, qty: 1 });
+          this.isCartOpen = true;
+        },
+        updateCartQty(id, delta) {
+          const item = this.cart.find(p => p.id === id);
+          if (item) { item.qty += delta; if (item.qty <= 0) this.cart = this.cart.filter(p => p.id !== id); }
+        },
+        handleCheckout() { this.checkoutBundle = { items: [...this.cart], total: this.cartTotal }; this.isCartOpen = false; this.view = 'checkout'; window.scrollTo(0, 0); },
+        proceedToCarrd(e) {
+          if (e) e.preventDefault();
+          const s = this.checkoutBundle.items.map(i => { const sub = (i.price * i.qty).toFixed(2); const n = this.tr.products?.[i.translationKey]?.name || 'Product'; return `${i.qty}x ${n} (€${sub})`; }).join(', ');
+          const d = `ORDER: ${s} | TOTAL: €${this.checkoutBundle.total}`;
+          const params = new URLSearchParams(window.location.search); params.set('pass', d);
+          window.location.href = window.location.pathname + `?${params.toString()}#kontakt`;
+        },
+        updateSEO() {
+          setTimeout(() => {
+            let desc = "Handcrafted Salsa Macha. Artisanal, Spicy, Crunchy.";
+            let img = "https://form.lamariasalsa.com/assets/images/image01.png";
+            let title = document.title;
+            if (this.view === 'post' && this.currentPost) {
+              desc = this.currentPost?.translations?.[this.lang]?.excerpt || this.currentPost?.excerpt || desc;
+              desc = desc.replace(/<[^>]*>?/gm, '');
+              img = this.currentPost?.image || img;
+            }
+            let setMeta = (n, c) => {
+              let el = document.querySelector(`meta[property="${n}"]`) || document.querySelector(`meta[name="${n}"]`);
+              if (!el) { el = document.createElement('meta'); if (n.startsWith('og:')) el.setAttribute('property', n); else el.setAttribute('name', n); document.head.appendChild(el); }
+              el.setAttribute('content', c);
+            };
+            setMeta('description', desc);
+            setMeta('og:title', title);
+            setMeta('og:description', desc);
+            setMeta('og:image', img);
+            setMeta('og:url', window.location.href);
+          }, 50);
+        },
+        initScrollReveal() {
+          const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } }); }, { threshold: 0.08 });
+          setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => obs.observe(el)); }, 100);
+        }
+      }));
+    });
+  </script>
+
+  <!-- Alpine.js -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Carrd Form Injector -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      const p = new URLSearchParams(window.location.search);
+      const o = p.get('pass'); const h = document.querySelector('input[name="pass"]');
+      if (o && h) { h.value = o; h.dispatchEvent(new Event('input', { bubbles: true })); h.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
+  </script>
+  <style>
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</body>
+
+</html>
